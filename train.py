@@ -23,7 +23,7 @@ def main():
     parser.add_argument('--nb_epoch', '-e', type=int, default=300)
     parser.add_argument('--nb_sample', '-ns', type=int, default=None)
     parser.add_argument('--param_dir', '-pd', type=str, default="./params")
-    parser.add_argument('--color', 'co', type=str, default='rgb')
+    parser.add_argument('--color', '-co', type=str, default='rgb')
 
     args = parser.parse_args()
     x_dir = args.x_dir
@@ -54,5 +54,11 @@ def main():
 
     data_gen = DataGenerator(x_dir, y_dir, target_size=input_shape[:2],
                              color_mode=color_mode, nb_sample=nb_sample)
-    model.fit_generator(data_gen.flow(batch_size), steps_per_epoch=data_gen.nb_sample,
+
+    steps_per_epoch = nb_sample // batch_size if nb_sample % batch_size == 0 else nb_sample // batch_size + 1
+    model.fit_generator(data_gen.flow(batch_size), steps_per_epoch=steps_per_epoch,
                         epochs=nb_epoch, callbacks=callbacks)
+
+
+if __name__ == "__main__":
+    main()
