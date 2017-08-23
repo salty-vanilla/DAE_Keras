@@ -40,7 +40,7 @@ def main():
 
     callbacks = [CSVLogger("learning_log_epoch.csv"),
                  BatchLogger("learning_log_iter.csv"),
-                 ModelSaver(os.path.join(param_dir, "DAE_{epoch:02d}.hdf5"),
+                 ModelSaver(os.path.join(param_dir, "DAE_{epoch:03d}.hdf5"),
                             save_freq=5)]
 
     input_shape = (height, width, channel)
