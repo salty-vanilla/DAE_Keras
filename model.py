@@ -52,7 +52,7 @@ def get_model(input_shape, is_plot=False):
     x = BatchNormalization()(x)
     x = Conv2D(512, (3, 3), activation="relu", padding="same")(x)
     x = BatchNormalization()(x)
-    x = Conv2D(256, (3, 3), activation="relu", padding="same")(x)
+    x = Conv2D(512, (3, 3), activation="relu", padding="same")(x)
     x = BatchNormalization()(x)
 
     x = UpSampling2D((2, 2))(x)
