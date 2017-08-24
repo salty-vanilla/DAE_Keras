@@ -52,7 +52,7 @@ def main():
     opt = Adam(lr=1e-3, beta_1=0.1)
     model.compile(opt, 'mse')
 
-    data_gen = DataGenerator(x_dir, y_dir, target_size=input_shape[:2],
+    data_gen = DataGenerator(x_dir, y_dir, target_size=(input_shape[1], input_shape[0]),
                              color_mode=color_mode, nb_sample=nb_sample)
 
     steps_per_epoch = nb_sample // batch_size if nb_sample % batch_size == 0 else nb_sample // batch_size + 1
