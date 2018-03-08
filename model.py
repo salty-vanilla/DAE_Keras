@@ -11,6 +11,27 @@ def _down_block(x,
                 activation='relu',
                 padding='same'):
 
+    """
+    Downsampling block
+    Args:
+        x: input tensor
+        filters: number of filters
+        conv_iteration: number of conv layers
+        kernel_size: kernel size of conv layer
+                    (int, int)
+        strides: stride of conv layer
+                    (int, int)
+        activation: activation function
+        padding: padding mode "same" or "valid"
+
+    Returns: tensor
+
+    # Input shape
+    (bs, h, w, c)
+
+    # Output shape
+    (bs, h//2, w//2, filters)
+    """
     for _ in range(conv_iteration):
         x = Conv2D(filters,
                    kernel_size=kernel_size,
@@ -32,6 +53,31 @@ def _up_block(x,
               strides=(1, 1),
               activation='relu',
               padding='same'):
+    """
+    Upsampling block
+    Args:
+        x: input tensor
+        filters: number of filters
+        channel_reduction: whether reducing channel in the last conv layer
+        conv_iteration: number of conv layers
+        kernel_size: kernel size of conv layer
+                    (int, int)
+        strides: stride of conv layer
+                    (int, int)
+        activation: activation function
+        padding: padding mode "same" or "valid"
+
+    Returns: tensor
+
+    # Input shape
+    (bs, h, w, c)
+
+    # Output shape
+    if channel_reduction:
+        (bs, h*2, w*2, filters//2)
+    else:
+        (bs, h*2, w*2, filters)
+    """
 
     x = UpSampling2D((2, 2))(x)
     for i in range(conv_iteration):
