@@ -5,7 +5,6 @@ from keras.optimizers import Adam
 from keras import backend as K
 from keras.callbacks import CSVLogger
 import argparse
-import os
 
 from DataGenerator import DataGenerator
 from model import get_model
@@ -52,12 +51,18 @@ def main():
     opt = Adam(lr=1e-3, beta_1=0.1)
     model.compile(opt, 'mse')
 
-    data_gen = DataGenerator(x_dir, y_dir, target_size=(input_shape[1], input_shape[0]),
-                             color_mode=color_mode, nb_sample=nb_sample)
+    data_gen = DataGenerator(x_dir, 
+                             y_dir, 
+                             target_size=(width, height),
+                             color_mode=color_mode, 
+                             nb_sample=nb_sample)
 
-    steps_per_epoch = nb_sample // batch_size if nb_sample % batch_size == 0 else nb_sample // batch_size + 1
-    model.fit_generator(data_gen.flow(batch_size), steps_per_epoch=steps_per_epoch,
-                        epochs=nb_epoch, callbacks=callbacks)
+    steps_per_epoch = nb_sample // batch_size if nb_sample % batch_size == 0 \
+            else nb_sample // batch_size + 1
+    model.fit_generator(data_gen.flow(batch_size), 
+                        steps_per_epoch=steps_per_epoch,
+                        epochs=nb_epoch, 
+                        callbacks=callbacks)
 
 
 if __name__ == "__main__":
