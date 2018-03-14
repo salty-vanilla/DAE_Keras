@@ -2,7 +2,7 @@
 
 ## Environment
 * tensorflow 1.5
-* Keras >= 2.0.8
+* Keras 2.0.8
 
 ## Usage
 ```
