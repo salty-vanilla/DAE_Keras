@@ -121,8 +121,8 @@ def get_model(input_shape, is_plot=False):
                         outputs=decoded)
 
     if is_plot:
-        from keras.utils.visualize_util import plot
-        plot(autoencoder, to_file='model.png', show_shapes=True)
+        from keras.utils.vis_utils import plot_model
+        plot_model(autoencoder, to_file='model.png', show_shapes=True)
 
     return autoencoder
 
