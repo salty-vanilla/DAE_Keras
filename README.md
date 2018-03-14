@@ -1,9 +1,8 @@
 # DAE_Keras
 
 ## Environment
-* tensorflow >= 1.0
-* Keras >= 2.0
-* cv2
+* tensorflow 1.5
+* Keras >= 2.0.8
 
 ## Usage
 ```
@@ -17,3 +16,11 @@ python train.py x_dir y_dir
 * y_dir : Original Image Dir
 
 対応するデータをx_dirとy_dir内にそれぞれ同名で配置すること
+
+```
+python predict.py model_path param_path image_dir 
+                  [--result_dir RESULT_DIR] [--width WIDTH]
+                  [--height HEIGHT] [--channel CHANNEL]
+                  [--batch_size BATCH_SIZE] [--color COLOR]
+
+```
